@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Prefill chunks": {
+      "commandName": "Project",
+      "commandLineArgs": "delete-chunks"
+    }
+  }
+}

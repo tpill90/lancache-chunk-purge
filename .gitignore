@@ -1,0 +1,13 @@
+bin
+obj
+/publish
+.vs
+*.ak
+lockfile
+/LancacheFileDeleter/LancacheFileDeleter.csproj.user
+/LancacheFileDeleter.sln.DotSettings.user
+/docs/site
+/docs/__pycache__
+/docs/RenderAnsiToSvg/__pycache__
+/scripts/*.log
+/LancacheFileDeleter/app.log

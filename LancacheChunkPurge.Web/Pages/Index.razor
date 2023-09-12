@@ -1,0 +1,58 @@
+﻿@page "/"
+@using System.Diagnostics
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<h3>Enter Value</h3>
+
+<!-- TODO need to do input validation -->
+<textarea @bind="TextAreaContent" rows="5" cols="30" placeholder="Paste one or more log lines"> </textarea>
+
+<br />
+<!-- TODO no need to click, do it automatically-->
+<button @onclick="HandleButtonClick">Submit</button>
+
+<br/>
+<br/>
+
+<p>@calculated</p>
+
+  
+<ol>
+    @foreach (var item in Items)
+    {
+        <li>@item</li>
+    }
+</ol>
+
+@code {
+
+    private string[] userInputLines = Array.Empty<string>();
+
+    private string TextAreaContent
+    {
+        get => string.Join("\n", userInputLines);
+        set => userInputLines = value.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
+    }
+
+    private string NewItem;
+    private List<string> Items = new List<string>();
+
+    private string userInput = string.Empty;
+    private string calculated = string.Empty;
+
+    private void HandleButtonClick()
+    {
+        //var parsedLog = NginxLogParser.ParseRequestLog(inputLine).First();
+
+        //var calculatedFilePaths = parsedLog.ComputeOnDiskFileName();
+        //calculated = calculatedFilePaths.First();
+        Debugger.Break();
+    }
+
+
+
+}
+
