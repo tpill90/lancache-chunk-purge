@@ -1,0 +1,60 @@
+# These jobs definitions are referenced and used by the other prefill projects
+name: 'build-test-dotnet'
+on: [push]
+
+# Needed to deploy to github pages
+permissions:
+  contents: write
+
+jobs:
+  dotnet-format:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:7.0
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - run: dotnet format --verify-no-changes
+
+  build-test:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:7.0
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - run: dotnet restore
+    - run: dotnet build --no-restore -c Release /p:TreatWarningsAsErrors=true
+    - run: dotnet test --no-restore -c Release /p:WarningLevel=0 
+
+# Based on : https://swimburger.net/blog/dotnet/how-to-deploy-aspnet-blazor-webassembly-to-github-pages
+  deploy-to-github-pages:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:7.0
+    steps:
+    - uses: actions/checkout@v3
+    
+    # publishes Blazor project to the release-folder
+    - name: Publish .NET Core Project
+      run: dotnet publish LancacheChunkPurge.Web/LancacheChunkPurge.Web.csproj -c Release -o release --nologo
+    
+    # changes the base-tag in index.html from '/' to 'lancache-chunk-purge' to match GitHub Pages repository subdirectory
+    - name: Change base-tag in index.html from / to lancache-chunk-purge
+      run: sed -i 's/<base href="\/" \/>/<base href="\/lancache-chunk-purge\/" \/>/g' release/wwwroot/index.html
+    
+    # copy index.html to 404.html to serve the same file when a file is not found
+    - name: copy index.html to 404.html
+      run: cp release/wwwroot/index.html release/wwwroot/404.html
+
+    # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore) 
+    - name: Add .nojekyll file
+      run: touch release/wwwroot/.nojekyll
+
+    # Needed for the next step, rsync isn't installed by default on the dotnet/sdk image.
+    - name: Install rsync 📚
+      run: apt-get update && apt-get install -y rsync
+      
+    - name: Commit wwwroot to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: release/wwwroot

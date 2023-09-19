@@ -108,7 +108,7 @@ namespace LancacheChunkPurge
             while (start < end)
             {
                 ulong segmentEnd = start + SliceSize - 1;
-               
+
                 segments.Add(new ByteRange { Lower = start, Upper = segmentEnd });
                 start = segmentEnd + 1;
             }
@@ -124,7 +124,7 @@ namespace LancacheChunkPurge
             //byte[] inputBytes = Encoding.UTF8.GetBytes(combined);
             //byte[] hashBytes = md5.ComputeHash(inputBytes);
 
-            
+
 
             //StringBuilder sb = new StringBuilder();
             //for (int i = 0; i < hashBytes.Length; i++)

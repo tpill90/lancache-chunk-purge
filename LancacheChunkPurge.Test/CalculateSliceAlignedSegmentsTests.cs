@@ -55,7 +55,7 @@
 
             //TODO explain
             segments.Should().HaveCount(7);
-            
+
             //TODO write out rest of tests
         }
 
