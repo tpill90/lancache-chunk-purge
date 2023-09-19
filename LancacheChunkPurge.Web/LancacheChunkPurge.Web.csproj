@@ -16,6 +16,12 @@
 
   <!-- Publishing settings-->
   <PropertyGroup>
+    <!-- Compiles directly to WASM instead of using an intermediate runtime -->
+    <RunAOTCompilation>false</RunAOTCompilation>
+
+    <PublishTrimmed>true</PublishTrimmed>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport>
 
   </PropertyGroup>
 

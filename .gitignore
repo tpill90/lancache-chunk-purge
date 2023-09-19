@@ -11,3 +11,4 @@ lockfile
 /docs/RenderAnsiToSvg/__pycache__
 /scripts/*.log
 /LancacheFileDeleter/app.log
+/LancacheChunkPurge.Web/publish
