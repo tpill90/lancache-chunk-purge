@@ -44,6 +44,19 @@
 
         //TODO rename + explain
         [Fact]
+        public void WholeFile_0ByteResponseSize()
+        {
+            var inputLogLine = "[steam] 192.168.1.55 / - - - [12/Sep/2023:23:03:55 +0100] \"GET /depot/228983/chunk/9056314563128ff716ecf15f542e7ffcc1f93c00 HTTP/1.1\" 200 0 \"-\" \"Valve/Steam HTTP Client 1.0\" \"MISS\" \"cache2-iad1.steamcontent.com\" \"-\"";
+            var parsedLog = NginxLogParser.ParseRequestLog(inputLogLine).First();
+
+            var calculatedFilePath = parsedLog.ComputeOnDiskFileName().First();
+
+            var expected = "d0/b6/954c0aa7444f48d1736534c9437fb6d0";
+            Assert.Equal(expected: expected, calculatedFilePath);
+        }
+
+        //TODO rename + explain
+        [Fact]
         public void RangeRequest_SpansMultipleSlices()
         {
             var inputLogLine = "[blizzard] 192.168.1.55 / - - - [12/Sep/2023:22:07:37 +0100] \"GET /tpr/zeus/data/c1/94/c1942d6badb10a911d3e617bac1e7be0 HTTP/1.1\" 206 6457285 \"-\" \"PostmanRuntime/7.32.3\" \"HIT\" \"level3.blizzard.com\" \"bytes=26380013-32837297\"";

@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using MD5;
 
 namespace LancacheChunkPurge
@@ -33,6 +34,17 @@ namespace LancacheChunkPurge
             if (RequestedWholeFile)
             {
                 var results = new List<string>();
+                //TODO comment
+                if (ResponseSizeBytes == 0)
+                {
+                    string requestKey = $"{CacheKey}{Url}bytes=0-1048575";
+                    var hashed = CalculateMd5Hash(requestKey);
+
+                    var filePath = $"{hashed.Substring(hashed.Length - 2)}/{hashed.Substring(hashed.Length - 4, 2)}/{hashed}";
+                    results.Add(filePath);
+                    return results;
+                }
+
                 var ranges = CalculateRanges(ResponseSizeBytes);
                 foreach (var range in ranges)
                 {

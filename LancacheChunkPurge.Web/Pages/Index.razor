@@ -19,7 +19,7 @@
 
 <h3>Delete the following files from your cache dir:</h3>
 <ol>
-    @foreach (var item in Items)
+    @foreach (var item in results)
     {
         <ul>@item</ul>
     }
@@ -43,7 +43,7 @@
         set => userInputLines = value.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
     }
 
-    private List<string> Items = new List<string>();
+    private List<string> results = new List<string>();
     
     private static DateTime GetBuildDate(Assembly assembly)
     {
@@ -69,20 +69,18 @@
 
     private void HandleButtonClick()
     {
+        //TODO dedupe user inputted request by url + byte range
         foreach (var line in userInputLines)
         {
             if (string.IsNullOrEmpty(line))
             {
                 continue;
             }
+
             var parsedLog = NginxLogParser.ParseRequestLog(line).First();
 
             var calculatedFilePaths = parsedLog.ComputeOnDiskFileName();
-            Items.AddRange(calculatedFilePaths);
+            results.AddRange(calculatedFilePaths);
         }
     }
-
-
-
 }
-
