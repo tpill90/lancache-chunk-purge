@@ -5,9 +5,7 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
-
-<h3>Enter Value</h3>
+<h3>Enter access.log entries, then click submit.</h3>
 
 <!-- TODO need to do input validation -->
 <textarea @bind="TextAreaContent" rows="5" cols="30" placeholder="Paste one or more log lines"> </textarea>
@@ -19,13 +17,11 @@
 <br/>
 <br/>
 
-<p>@calculated</p>
-
-  
+<h3>Delete the following files from your cache dir:</h3>
 <ol>
     @foreach (var item in Items)
     {
-        <li>@item</li>
+        <ul>@item</ul>
     }
 </ol>
 
@@ -48,10 +44,7 @@
     }
 
     private List<string> Items = new List<string>();
-
-    private string userInput = string.Empty;
-    private string calculated = string.Empty;
-
+    
     private static DateTime GetBuildDate(Assembly assembly)
     {
         const string BuildVersionMetadataPrefix = "+build";
@@ -76,11 +69,17 @@
 
     private void HandleButtonClick()
     {
-        //var parsedLog = NginxLogParser.ParseRequestLog(inputLine).First();
+        foreach (var line in userInputLines)
+        {
+            if (string.IsNullOrEmpty(line))
+            {
+                continue;
+            }
+            var parsedLog = NginxLogParser.ParseRequestLog(line).First();
 
-        //var calculatedFilePaths = parsedLog.ComputeOnDiskFileName();
-        //calculated = calculatedFilePaths.First();
-        Debugger.Break();
+            var calculatedFilePaths = parsedLog.ComputeOnDiskFileName();
+            Items.AddRange(calculatedFilePaths);
+        }
     }
 
 
