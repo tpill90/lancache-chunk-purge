@@ -8,8 +8,8 @@
   "resources": {
     "assembly": {
       "ByteSize.dll": "sha256-3z5US7s8wSQ2X\/Ux6RgHv0EEnM\/GbvzwiaVUdzQ5lYU=",
-      "LancacheChunkPurge.dll": "sha256-QBcUHoX7X\/aOOZCu9VrfRZakbES6vkOqmkY12DooeEk=",
-      "LancacheChunkPurge.Web.dll": "sha256-WoqvtPLs0Di0HeE7qhW2rcZp4FuaUI3fvBjn2w2S8PY=",
+      "LancacheChunkPurge.dll": "sha256-+S4deEV9f41DRSqskeD7ql6l4UmX4CcftQ1Rqv7yoDI=",
+      "LancacheChunkPurge.Web.dll": "sha256-GI\/bYkLMBwPfLbZFUMO52xvNw7OqoKLaI5t6KSZqZdw=",
       "Microsoft.AspNetCore.Components.dll": "sha256-1OT3Xm+vUaOSROYywuXKOEEp1ie6ww6FiZkU8+cgDCI=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-LXNdJoDAdnjSWCYbhEnG1vvAy3YBP4\/X7l27a3WgTPY=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-XCOctJUd08gOiPYVc+oS9bvDR1mMNjAxF7kQ69WHPL8=",
