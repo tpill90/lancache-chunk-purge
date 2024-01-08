@@ -13,11 +13,10 @@
         public bool RequestedWholeFile { get; set; }
 
         public string RangeRequested { get; set; }
+
         //TODO remove the 'range=' text from ever being selected in the first place
         public ulong LowerRange => UInt64.Parse(RangeRequested.Replace("bytes=", "").Split('-')[0]);
         public ulong UpperRange => UInt64.Parse(RangeRequested.Replace("bytes=", "").Split('-')[1]);
-
-        public string RequestAsString => $"{Url} {RangeRequested}";
 
         public override string ToString()
         {
@@ -70,7 +69,6 @@
 
                 return calculatedHashes;
             }
-            throw new Exception("");
         }
 
         public static List<ByteRange> CalculateRanges(uint totalSize)
@@ -118,12 +116,11 @@
         private static string CalculateMd5Hash(string combined)
         {
             byte[] inputBytes = Encoding.UTF8.GetBytes(combined);
-            var hashed = ManagedMD5.Calculate(inputBytes);
-            return hashed;
+            return ManagedMD5.Calculate(inputBytes);
         }
     }
 
-    public class ByteRange
+    public sealed class ByteRange
     {
         public ulong Lower { get; set; }
         public ulong Upper { get; set; }

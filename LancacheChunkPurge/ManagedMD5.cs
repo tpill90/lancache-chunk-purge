@@ -1,7 +1,9 @@
-﻿//TODO comment
-namespace MD5
+﻿namespace LancacheChunkPurge
 {
     /// <summary>
+    /// Completely managed implementation of MD5 required for Blazor to work correctly.  Blazor cannot use
+    /// the built in .NET MD5 implementation as it uses native code internally
+    /// 
     /// RFC for MD5 https://tools.ietf.org/html/rfc1321
     /// Based on the pseudo code from Wikipedia: https://en.wikipedia.org/wiki/MD5
     /// </summary>

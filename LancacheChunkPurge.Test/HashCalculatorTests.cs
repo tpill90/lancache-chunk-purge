@@ -72,7 +72,6 @@
             calculatedFilePaths[4].Should().Be("3c/c6/2cfb5b84a9fad3e5c0f62fbaee57c63c");
             calculatedFilePaths[5].Should().Be("21/b7/90dd1966e01fa49a9d49f9200551b721");
             calculatedFilePaths[6].Should().Be("90/a7/da189ae006772318633d6ebe04f1a790");
-
         }
     }
 }
